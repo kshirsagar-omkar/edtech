@@ -1,0 +1,27 @@
+databases:
+  - name: ajdb19
+    plan: free
+    engine: postgres
+    databaseName: ajdb19
+    user: root
+
+services:
+  - type: web
+    name: jsp-login-app
+    runtime: docker
+    envVars:
+      - key: JDBC_URL
+        fromDatabase:
+          name: ajdb19
+          property: connectionString
+      - key: DB_USER
+        fromDatabase:
+          name: ajdb19
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: ajdb19
+          property: password
+    env:
+      - key: JAVA_OPTS
+        value: "-Djava.security.egd=file:/dev/./urandom"

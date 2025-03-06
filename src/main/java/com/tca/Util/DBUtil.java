@@ -5,9 +5,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBUtil {
-    // Get complete database URL from environment variable
-    private static final String DATABASE_URL = System.getenv("DATABASE_URL");
-    
+    // Hardcoded Render database credentials
+    private static final String DB_URL = "jdbc:postgresql://dpg-cv497i5umphs73eqreh0-a.singapore-postgres.render.com:5432/ajdb19?sslmode=require";
+    private static final String DB_USER = "root";
+    private static final String DB_PASS = "zEh8cb5Ge5ZC8QiYYcXpyOXNuymrztoS";
+
     static {
         try {
             Class.forName("org.postgresql.Driver");
@@ -17,9 +19,6 @@ public class DBUtil {
     }
 
     public static Connection getConnection() throws SQLException {
-        if (DATABASE_URL == null) {
-            throw new SQLException("Database URL not found in environment variables");
-        }
-        return DriverManager.getConnection(DATABASE_URL);
+        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
     }
 }

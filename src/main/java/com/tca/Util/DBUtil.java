@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBUtil {
+    // Get complete database URL from environment variable
+    private static final String DATABASE_URL = System.getenv("DATABASE_URL");
+    
     static {
         try {
             Class.forName("org.postgresql.Driver");
@@ -14,15 +17,9 @@ public class DBUtil {
     }
 
     public static Connection getConnection() throws SQLException {
-        // Use environment variables for database credentials
-        String dbUrl = System.getenv("JDBC_URL");
-        String dbUser = System.getenv("DB_USER");
-        String dbPass = System.getenv("DB_PASSWORD");
-
-        if (dbUrl == null || dbUser == null || dbPass == null) {
-            throw new RuntimeException("Database environment variables are not set!");
+        if (DATABASE_URL == null) {
+            throw new SQLException("Database URL not found in environment variables");
         }
-
-        return DriverManager.getConnection(dbUrl, dbUser, dbPass);
+        return DriverManager.getConnection(DATABASE_URL);
     }
 }

@@ -157,11 +157,12 @@
     <button class="btn btn-sm btn-outline-primary">
       <i class="fas fa-bell"></i>
     </button>
-    <form method="post" action="./logout">
-	    <a href="logout" class="btn btn-sm btn-danger">
-	      <i class="fas fa-sign-out-alt"></i>
-	    </a>
-    </form>
+    
+    <form method="post" action="logout" class="d-inline">
+	    <button type="submit" class="btn btn-sm btn-danger">
+	        <i class="fas fa-sign-out-alt"></i> Logout
+	    </button>
+	</form>
     
   </div>
 </div>
